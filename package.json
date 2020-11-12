@@ -1,0 +1,35 @@
+{
+  "name": "unsplash_infinite_scroll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build":"react-scripts build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "babel-register": "^6.26.0",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "node-fetch": "^2.6.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-modal": "^3.11.2",
+    "react-modal2": "^5.0.2",
+    "react-responsive-modal": "^5.2.6",
+    "reactjs-popup": "^2.0.4",
+    "universal-config": "^0.3.0",
+    "unsplash-js": "^4.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "terser-brunch": "^4.0.0"
+  }
+}
