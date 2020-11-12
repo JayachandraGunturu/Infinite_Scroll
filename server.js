@@ -19,6 +19,6 @@ app.get('/api/photos', (req, res) => {
     .then(json => res.json(json));
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
