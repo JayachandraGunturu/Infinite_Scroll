@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev",
+    "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build":"react-scripts build",
-    "postinstall": "npm install --prefix ./client"
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +21,7 @@
     "node-fetch": "^2.6.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^3.11.0",
     "react-modal": "^3.11.2",
     "react-modal2": "^5.0.2",
     "react-responsive-modal": "^5.2.6",

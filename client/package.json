@@ -4,21 +4,22 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "axios": "^0.18.0",
     "babel-register": "^6.26.0",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "node-fetch": "^2.6.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^3.11.0",
+    "react-infinite-scroll-component": "^4.5.0",
     "react-modal": "^3.11.2",
     "react-modal2": "^5.0.2",
     "react-responsive-modal": "^5.2.6",
+    "react-scripts": "2.1.5",
     "reactjs-popup": "^2.0.4",
     "universal-config": "^0.3.0",
-    "unsplash-js": "^4.8.0",
-    "axios": "^0.18.0",
-    "react-infinite-scroll-component": "^4.5.0",
-    "react-scripts": "2.1.5"
+    "unsplash-js": "^4.8.0"
   },
   "scripts": {
     "start": "react-scripts start",

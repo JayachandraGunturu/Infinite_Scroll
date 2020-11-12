@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Image from './Image';
+import { MdArrowBack, MdClose } from 'react-icons/md'
 import Popup from 'reactjs-popup';
 export class Images extends Component {
   state = {
@@ -10,12 +11,15 @@ export class Images extends Component {
     start: 1,
     isOpen:false,
     picId:null,
-    pic:0
+    pic:0,
+    picd:null,
+    picUrl:null
   };
   
 
   componentDidMount() {
     const { count, start } = this.state;
+    this.setState({isOpen:false})
     axios
       .get(`/api/photos?count=${count}&start=${start}`)
       .then(res => this.setState({ images: res.data }));
@@ -31,25 +35,26 @@ export class Images extends Component {
    closeModal(){
     this.setState({isOpen:false})
   }
-
-  backPic=()=>{
-    var ll=this.state.images
-    
-   var i=this.state.pic
-   alert("back")
-   if(i>0)
-    this.setState({picId:ll[i-1].urls.thumb,pic:i-1})
-  }
-
+  
   nextPic=()=>{
     var ll=this.state.images
+    var i=this.state.pic
     
-   var i=this.state.pic
-   alert("next")
-   console.log(ll[i])
+    var picurl="https://web.whatsapp.com/send?text="
+    picurl+=ll[i+1].urls.regular
+    console.log(picurl)
    if(i<this.state.images.length)
-    this.setState({picId:ll[i+1].urls.thumb,pic:i+1})
-  }
+    this.setState({picId:ll[i+1].urls.regular,pic:i+1,picd:ll[i+1],picd:ll[i+1].id,picUrl:picurl})
+   }
+
+   prevPic=()=>{
+    var ll=this.state.images
+    var i=this.state.pic
+    var picurl="https://web.whatsapp.com/send?text="
+    picurl+=ll[i-1].urls.regular
+   if(i>0)
+    this.setState({picId:ll[i-1].urls.regular,pic:i-1,picd:ll[i-1].id,picUrl:picurl})
+   }
 
   fetchImages = () => {
     const { count, start } = this.state;
@@ -60,13 +65,12 @@ export class Images extends Component {
         this.setState({ images: this.state.images.concat(res.data) })
       );
   };
-
   myLoad=(i)=>{
     var ll=this.state.images
-    
-    
-    this.setState({picId:ll[i].urls.thumb,pic:i})
-    console.log(this.state.pic,"i",i)
+    var picurl="https://web.whatsapp.com/send?text="
+    picurl+=ll[i-1].urls.regular
+    this.setState({picId:ll[i].urls.regular,pic:i,picd:ll[i].id,picUrl:picurl})
+    console.log(ll[i].id)
     this.openModal();
   }
 
@@ -74,6 +78,7 @@ export class Images extends Component {
     
     return (
       <div className='images'>
+        <div style={{zIndex:9999}}><MdClose onClick={()=>this.closeModal()} style={(this.state.isOpen==false)?{opacity:0}:{opacity:1}} className="closing"></MdClose></div>
         <Popup trigger={
         <div>
         <InfiniteScroll
@@ -87,11 +92,19 @@ export class Images extends Component {
             <Image key={image.id} image={image} />
             </div>
           ))}
-        </InfiniteScroll></div>} modal>
+        </InfiniteScroll></div>} modal >
     
         
-        <div style={{backgroundColor:"black",width:"50vw",height:"50vh",zIndex:99}}><button onClick={()=>this.backPic()}>prev</button><img src={this.state.picId} /><button onClick={()=>this.nextPic()}>next</button>
-             </div>
+        <div className="modal">
+          <div className="elem">
+            <div><button onClick={()=>this.prevPic()}><MdArrowBack className="arrow" /></button></div>
+            <div className="hov"><img className="imC" src={this.state.picId} alt=" " />
+              <div className="desc"><h2 style={{alignContent:"center"}}><a href={this.state.picUrl} data-action="share/whatsapp/share">Share via Whatsapp</a></h2></div>
+            </div>
+            <div><button onClick={()=>this.nextPic()} ><MdArrowBack className="arrowB" /></button></div>
+          </div>
+          <h2>Press "Esc" to exit modal</h2>
+        </div>
   </Popup>
       </div>
     );
